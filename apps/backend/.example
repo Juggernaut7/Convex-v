@@ -1,0 +1,26 @@
+PORT=5000
+NODE_ENV=development
+# Render will override PORT automatically in production.
+
+# MongoDB (swap in your Atlas URI or hosted cluster for production)
+MONGO_URI=mongodb://localhost:27017/convex
+
+# Arc Mainnet / contracts
+RPC_URL=https://rpc.mainnet.arc.io
+CHAIN_ID=5042
+MANAGER_CONTRACT_ADDRESS=0xd59A8fdf194F41fFb46888d63909F298DF600F30
+
+# Resolver wallet (controls on-chain resolution)
+RESOLVER_PRIVATE_KEY=0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+# Oracle configuration
+COINGECKO_API_URL=https://api.coingecko.com/api/v3/simple/price
+SPORTS_API_URL=https://api.example.com/sports
+SPORTS_API_KEY=your-sports-api-key
+
+# Oracle job settings
+ORACLE_POLL_INTERVAL_MS=60000
+ORACLE_MAX_RETRIES=5
+ORACLE_CACHE_TTL_SECONDS=60
+
+

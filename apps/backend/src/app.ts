@@ -1,0 +1,54 @@
+import express from "express";
+import cors, { CorsOptions } from "cors";
+import { logger } from "./config/logger";
+import marketsRouter from "./routes/markets";
+
+export function createApp() {
+  const app = express();
+
+  const corsOptions: CorsOptions = {
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
+    exposedHeaders: ["Content-Length", "Content-Type"],
+    credentials: false, // Set to false when using origin: "*"
+    maxAge: 86400, // 24 hours
+  };
+
+  // Apply CORS to all routes
+  app.use(cors(corsOptions));
+  // Handle preflight requests
+  app.options("*", cors(corsOptions));
+  app.use(express.json());
+
+  app.get("/", (_req, res) => {
+    res.json({
+      name: "Convex Backend",
+      status: "ok",
+      version: "1.0.0",
+      endpoints: {
+        health: "/health",
+        markets: {
+          "GET /api/markets/metadata": "List all markets metadata",
+          "GET /api/markets/metadata/:onChainId": "Get market metadata by on-chain ID",
+          "POST /api/markets/metadata": "Create market metadata",
+        },
+      },
+    });
+  });
+
+  app.get("/health", (_req, res) => {
+    res.json({ ok: true });
+  });
+
+  app.use("/api/markets", marketsRouter);
+
+  app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+    logger.error({ err }, "Unhandled error");
+    res.status(500).json({ error: "Internal server error" });
+  });
+
+  return app;
+}
+
+

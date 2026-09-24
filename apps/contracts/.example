@@ -1,0 +1,8 @@
+PRIVATE_KEY=0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+RPC_URL=https://rpc.mainnet.arc.io
+CHAIN_ID=5042
+# Arc native USDC is used for gas and staking; no token address is required.
+TREASURY_ADDRESS=0xcccccccccccccccccccccccccccccccccccccccc
+ARCSCAN_API_KEY=your-arcscan-key
+REPORT_GAS=false
+MANAGER_CONTRACT_ADDRESS=0xd59A8fdf194F41fFb46888d63909F298DF600F30
